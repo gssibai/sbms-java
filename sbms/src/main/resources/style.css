@@ -1,0 +1,66 @@
+.menu-button {
+   /* -fx-background-color: #f8f9fd; */
+   /*-fx-background-color:linear-gradient(to left, #dcdde0, #f8f9fd);*/
+    -fx-background-color: none;
+    -fx-background-radius: 10;
+
+}
+
+/*
+.Deposit-button {
+    -fx-background-color: none;
+    -fx-background-radius: 10;
+}
+*/
+.bg {
+-fx-background-color: white;
+}
+.mainbg{
+-fx-background-color: #f8f9fd;
+    -fx-background-radius: 30;
+}
+.subbg{
+    -fx-background-radius: 20;
+-fx-background-color: white;
+/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 50, 0, 0, 30);*/
+
+}
+
+.menu-button:hover {
+-fx-background-color: #f8f9fd;
+-fx-background-radius: 10;
+}
+.menu-button:pressed {
+-fx-background-color:linear-gradient(to left, #dcdde0, #f8f9fd);
+-fx-background-radius: 10;
+}
+.menu-button.active {
+-fx-background-color:linear-gradient(to left, #dcdde0, #f8f9fd);
+-fx-background-radius: 10;
+}
+
+.completebtn {
+ -fx-background-color: #e6e6e6;
+    -fx-background-radius: 10;
+}
+.completebtn:hover{
+-fx-background-color: #e6e6e6;
+-fx-background-radius: 13;
+-fx-border-color: green;
+-fx-border-radius: 10;
+}
+.completebtn.active {
+-fx-background-color:linear-gradient(to left, #dcdde0, #f8f9fd);
+-fx-background-radius: 13;
+}
+
+.valuefld {
+
+  -fx-border-style: solid;
+  -fx-border-color : #dcdde0;
+  -fx-border-radius: 10px;
+  -fx-alignment: center;
+  -fx-border-width: 100%;
+  -fx-background-radius : 10px;
+
+}

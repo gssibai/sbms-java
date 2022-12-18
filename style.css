@@ -1,0 +1,10 @@
+.Cards-button {
+    -fx-background-color: #e6e4ea;
+    -fx-background-radius: 10;
+
+}
+.Deposit-button {
+    -fx-background-color: none;
+    -fx-background-radius: 10;
+
+}
