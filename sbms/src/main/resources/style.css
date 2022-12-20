@@ -64,3 +64,13 @@
   -fx-background-radius : 10px;
 
 }
+.deletebtn{
+-fx-background-color: #e6e6e6;
+    -fx-background-radius: 10;
+}
+.deletebtn:hover {
+-fx-background-color: #d16969;
+-fx-background-radius: 13;
+-fx-border-color: red;
+-fx-border-radius: 10;
+}

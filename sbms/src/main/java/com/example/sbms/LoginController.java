@@ -3,6 +3,7 @@ package com.example.sbms;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -20,17 +21,20 @@ public class LoginController {
     private Button quitbtn;
 
     @FXML
-    private TextField txtId;
+    private TextField txtIdLogin;
 
     @FXML
-    private PasswordField txtPass;
+    private PasswordField txtPassLogin;
     @FXML
     private Button btnCreatAcc;
+
+
     @FXML
     void btnQuit_Action(ActionEvent event) {
         Stage stage = (Stage) quitbtn.getScene().getWindow();
         stage.close();
     }
+
     @FXML
     void btnCreate_Action(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnCreatAcc.getScene().getWindow();
@@ -38,20 +42,23 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
+
     @FXML
     void btnLogin_click(MouseEvent event) throws IOException {
-        var id = txtId.getText();
-        var pass = txtPass.getText();
+        SecureAcc sa = SecureAcc.getSA(txtIdLogin.getText(), txtPassLogin.getText());
 
-        if (id.equals("123") && pass.equals("123")) {
-            Stage stage = (Stage) btnLogin.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
-        } else {
+        if (sa == null) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Invalid username or password");
             a.show();
+        } else {
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            Parent root = (Parent)fxmlLoader.load();
+            HelloController controller = fxmlLoader.<HelloController>getController();
+            controller.setSa(sa);
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
         }
     }
 

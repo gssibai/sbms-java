@@ -24,7 +24,7 @@
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin></Label>
-                        <TextField fx:id="txtId" style="-fx-background-radius: 10;" stylesheets="@../../../style.css">
+                        <TextField fx:id="txtIdLogin" style="-fx-background-radius: 10;" stylesheets="@../../../style.css">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin></TextField>
@@ -32,7 +32,7 @@
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin></Label>
-                        <PasswordField fx:id="txtPass" style="-fx-background-radius: 10;">
+                        <PasswordField fx:id="txtPassLogin" style="-fx-background-radius: 10;">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>

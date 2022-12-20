@@ -9,12 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Random;
@@ -43,64 +40,45 @@ public class SignupController {
     @FXML
     private TextField txtRePass;
 
+
     @FXML
     void btnCreate_Action(ActionEvent event) throws IOException {
-        var email = txtEmail.getText();
-        var name = txtName.getText();
-        var surname = txtSurname.getText();
-        var phoneNo = txtPhoneNo.getText();
 
-        var pass = txtPass.getText();
+
         var rePass = txtRePass.getText();
-        Random id = new Random();
-        int low = 1000, high = 9999;
-        int idNo = id.nextInt(high - low) + low;
-
-        if (pass.equals(rePass)) {
-            try {
-                File file = new File(idNo + ".txt");
-
-                FileWriter wr = new FileWriter(file);
-                String idString = Integer.toString(idNo);
-                wr.write(email);
-                wr.write(name);
-                wr.write(surname);
-                wr.write(phoneNo);
-                wr.write(idString);
-                wr.write(pass);
-                wr.flush();
-                wr.close();
-                Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                a.setTitle("Account ID");
-                a.setContentText("Your Account has been created successfully \n\n" + "Your Account ID:  " + idNo);
-                Optional<ButtonType> result = a.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    Stage stage = (Stage) mainSignup.getScene().getWindow();
-                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load());
-                    stage.setScene(scene);
-                } else {
-                    Alert b = new Alert(Alert.AlertType.INFORMATION);
-                    b.setTitle("Cancelling");
-                    b.setContentText("Account not created");
-                    file.delete();
-                    Stage stage = (Stage) mainSignup.getScene().getWindow();
-                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load());
-                    stage.setScene(scene);
-                }
-                
-            } catch (IOException e) {
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setContentText("Error" + e);
-                a.show();
-            }
-        }else {
+        if (!rePass.equals(txtPass.getText())) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("Password not match");
             a.setContentText("re enter your password again");
             a.show();
+            return;
         }
+
+        SecureAcc sa = new SecureAcc();
+        sa.setPass(txtPass.getText());
+        sa.setName(txtName.getText());
+        sa.setSurname(txtSurname.getText());
+        sa.setEmail(txtEmail.getText());
+        sa.setPhoneNo(txtPhoneNo.getText());
+
+        if (sa.save()) {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Account ID");
+            a.setContentText("Your Account has been created successfully \n\n" + "Your Account ID:  " + sa.getId());
+            a.show();
+
+            Stage stage = (Stage) mainSignup.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Error");
+            a.setContentText("Error occurred");
+            a.show();
+        }
+
+
     }
 
     @FXML
