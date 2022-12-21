@@ -45,6 +45,7 @@ public class LoginController {
 
     @FXML
     void btnLogin_click(MouseEvent event) throws IOException {
+
         SecureAcc sa = SecureAcc.getSA(txtIdLogin.getText(), txtPassLogin.getText());
 
         if (sa == null) {
@@ -54,7 +55,7 @@ public class LoginController {
         } else {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Parent root = (Parent)fxmlLoader.load();
+            Parent root = fxmlLoader.load();
             HelloController controller = fxmlLoader.<HelloController>getController();
             controller.setSa(sa);
             Scene scene = new Scene(fxmlLoader.load());

@@ -321,9 +321,9 @@
                               <Font name="Lato Regular" size="27.0" />
                            </font>
                         </Label>
-                        <Pane layoutX="400.0" layoutY="90.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
+                        <Pane fx:id="paneMainPhone" layoutX="400.0" layoutY="90.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
                            <children>
-                              <Button layoutX="167.0" layoutY="81.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="109.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Edit Number">
+                              <Button fx:id="btnEditPhone" layoutX="167.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnEditPhone_Action" prefHeight="30.0" prefWidth="109.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Edit Number">
                                  <padding>
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </padding>
@@ -336,7 +336,7 @@
                               <Label layoutX="93.0" layoutY="55.0" text="+90 555 555 55 55" />
                            </children>
                         </Pane>
-                        <Pane layoutX="70.0" layoutY="90.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
+                        <Pane fx:id="paneMainName" layoutX="70.0" layoutY="90.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
                            <children>
                               <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="-6.0" prefHeight="100.0" prefWidth="279.0" spacing="15.0">
                                  <children>
@@ -355,26 +355,26 @@
                                     <Insets left="30.0" right="10.0" />
                                  </padding>
                               </HBox>
-                              <Button layoutX="175.0" layoutY="81.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Edit Name">
+                              <Button fx:id="btnEditName" layoutX="175.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnEditName_Action" prefHeight="30.0" prefWidth="102.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Edit Name">
                                  <padding>
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </padding>
                               </Button>
                            </children>
                         </Pane>
-                        <Pane layoutX="70.0" layoutY="240.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
+                        <Pane fx:id="paneMainEmail" layoutX="70.0" layoutY="240.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
                            <children>
                               <Label layoutX="17.0" layoutY="10.0" text="Email:">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="74.0" layoutY="50.0" text="email@mail.com">
+                              <Label layoutX="74.0" layoutY="43.0" text="email@mail.com">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="178.0" layoutY="85.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Edit Email">
+                              <Button fx:id="btnEditEmail" layoutX="178.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnEditEmail_Action" prefHeight="30.0" prefWidth="102.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Edit Email">
                                  <padding>
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </padding>
@@ -414,6 +414,84 @@
                               <Image url="@../../../img/infodesign.png" />
                            </image>
                         </ImageView>
+                        <Pane fx:id="paneName" layoutX="70.0" layoutY="91.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css" visible="false">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="-6.0" prefHeight="100.0" prefWidth="279.0" spacing="15.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Name">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="txtReName" styleClass="valuefld" stylesheets="@../../../style.css" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Surname">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="txtReSurname" styleClass="valuefld" stylesheets="@../../../style.css" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                              <Button fx:id="btnEditNameDone" layoutX="175.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnEditNameDone_Action" prefHeight="30.0" prefWidth="102.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Done">
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                 </padding>
+                              </Button>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneEditPhone" layoutX="400.0" layoutY="88.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css" visible="false">
+                           <children>
+                              <Button fx:id="txtDoneRePhone" layoutX="167.0" layoutY="81.0" mnemonicParsing="false" onAction="#txtDoneRePhone_Action" prefHeight="30.0" prefWidth="109.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Done">
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                 </padding>
+                              </Button>
+                              <Label fx:id="btnEditPhoneDone" layoutX="13.0" layoutY="15.0" onDragDetected="#btnEditPhoneDone_Action" text="Phone Number:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtRePhone" layoutX="74.0" layoutY="47.0" styleClass="valuefld" stylesheets="@../../../style.css" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneEditEmail" layoutX="70.0" layoutY="240.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css" visible="false">
+                           <children>
+                              <Label layoutX="17.0" layoutY="10.0" text="Email:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnEditEmailDone" layoutX="178.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnEditEmailDone_Action" prefHeight="30.0" prefWidth="102.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Done">
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                 </padding>
+                              </Button>
+                              <TextField fx:id="txtEditEmail" layoutX="63.0" layoutY="44.0" />
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children>

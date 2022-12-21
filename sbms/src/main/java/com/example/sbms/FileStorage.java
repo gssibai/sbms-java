@@ -1,6 +1,7 @@
 package com.example.sbms;
 
 import java.io.*;
+import java.util.Objects;
 
 public class FileStorage implements IStorage {
 
@@ -44,6 +45,7 @@ public class FileStorage implements IStorage {
             BufferedReader br = new BufferedReader(fr);
             SecureAcc sa = new SecureAcc();
             String fPassHash = br.readLine();
+
             if (!fPassHash.equals(passHash)) {
                 br.close();
                 fr.close();

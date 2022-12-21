@@ -3,12 +3,15 @@ package com.example.sbms;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -61,6 +64,8 @@ public class HelloController implements Initializable {
     private TextField txtDAmount;
     @FXML
     private Button btnDeleteAcc;
+    @FXML
+    private Pane paneName;
 
     private SecureAcc sa;
 
@@ -70,22 +75,121 @@ public class HelloController implements Initializable {
 
     @FXML
     void btnComplete_Action(ActionEvent event) {
-      double amount=  Double.parseDouble(txtDAmount.getText());
+        double amount = Double.parseDouble(txtDAmount.getText());
         sa.deposit(amount);
     }
 
+    void message() {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Information");
+        a.setContentText("Your changes has been saved!");
+
+    }
+
+    //*************Personal informations panel buttons **********
     @FXML
-    void btnDeleteAcc_Action(ActionEvent event) {
+    private TextField txtReName;
+
+    @FXML
+    private TextField txtReSurname;
+    @FXML
+    private TextField txtRePhone;
+    @FXML
+    private Pane paneEditPhone;
+    @FXML
+    private Pane paneEditEmail;
+    @FXML
+    private Button btnEditEmail;
+    @FXML
+    private TextField txtEditEmail;
+    @FXML
+    private Button btnEditEmailDone;
+    @FXML
+    private Button btnEditPhoneDone;
+    @FXML
+    private Button btnEditNameDone;
+    @FXML
+    private Pane paneMainPhone;
+    @FXML
+    private Pane paneMainName;
+    @FXML
+    private Pane paneMainEmail;
+
+
+
+    @FXML
+    void btnEditEmail_Action(ActionEvent event) {
+        paneEditEmail.setVisible(true);
+        paneMainEmail.setVisible(false);
+    }
+
+    @FXML
+    void btnEditEmailDone_Action(ActionEvent event) {
+        if (!txtEditEmail.getText().equals(null)) {
+            sa.setEmail(txtEditEmail.getText());
+            sa.save();
+            message();
+        }
+        paneMainEmail.setVisible(true);
+        paneEditEmail.setVisible(false);
+    }
+
+    @FXML
+    void btnEditPhone_Action(ActionEvent event) {
+        paneEditPhone.setVisible(true);
+        paneMainPhone.setVisible(false);
+
+    }
+
+    @FXML
+    void btnEditPhoneDone_Action(ActionEvent event) {
+        if (!txtRePhone.getText().equals(null)) {
+            sa.setPhoneNo(txtRePhone.getText());
+            sa.save();
+        }
+        paneMainPhone.setVisible(true);
+        paneEditPhone.setVisible(false);
+        message();
+    }
+
+    @FXML
+    void btnDeleteAcc_Action(ActionEvent event) throws IOException {
 
         Alert a = new Alert(Alert.AlertType.CONFIRMATION);
         a.setTitle("Account deleting");
         a.setContentText("You are deleting your account\n\nAre you sure?");
-        Optional<ButtonType> result= a.showAndWait();
-        if (result.get() == ButtonType.OK){
+        Optional<ButtonType> result = a.showAndWait();
+        if (result.get() == ButtonType.OK) {
             sa.delete();
+            Stage stage = (Stage) paneInfo.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
         }
     }
 
+    @FXML
+    void btnEditName_Action(ActionEvent event) {
+        paneName.setVisible(true);
+        paneMainName.setVisible(false);
+    }
+    @FXML
+    void btnEditNameDone_Action(ActionEvent event) {
+        if (!txtReName.getText().equals(null)) {
+            sa.setName(txtReName.getText());
+            sa.save();
+        }
+        if (!txtReSurname.getText().equals(null)) {
+            sa.setSurname(txtReSurname.getText());
+            sa.save();
+        }
+
+        paneMainName.setVisible(true);
+
+        paneName.setVisible(false);
+    }
+
+    //  ************
     @FXML
     void quit(MouseEvent event) {
 
@@ -132,6 +236,9 @@ public class HelloController implements Initializable {
         paneDeposit.setVisible(false);
         paneWithdraw.setVisible(false);
         paneInfo.setVisible(false);
+        paneName.setVisible(false);
+        paneEditPhone.setVisible(false);
+        paneEditEmail.setVisible(false);
     }
 
     @FXML

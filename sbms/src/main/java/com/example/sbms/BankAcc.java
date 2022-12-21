@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class BankAcc extends PersonalData {
     private String id = null;
-    private Double balance;
+    private Double balance= 0.0;
 
     public String getId() {
         return id;
