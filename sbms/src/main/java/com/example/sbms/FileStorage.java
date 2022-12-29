@@ -41,7 +41,7 @@ public class FileStorage implements IStorage {
     @Override
     public SecureAcc read(String id, String passHash) {
         try {
-            FileReader fr = new FileReader(id);
+            FileReader fr = new FileReader(id + ext);
             BufferedReader br = new BufferedReader(fr);
             SecureAcc sa = new SecureAcc();
             String fPassHash = br.readLine();
@@ -51,6 +51,7 @@ public class FileStorage implements IStorage {
                 fr.close();
                 return null;
             }
+
             sa.setFaKey(br.readLine());
             sa.setName(br.readLine());
             sa.setSurname(br.readLine());

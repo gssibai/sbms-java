@@ -50,15 +50,16 @@ public class LoginController {
 
         if (sa == null) {
             Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Error");
             a.setContentText("Invalid username or password");
             a.show();
         } else {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Parent root = fxmlLoader.load();
+           Parent root = fxmlLoader.load();
             HelloController controller = fxmlLoader.<HelloController>getController();
             controller.setSa(sa);
-            Scene scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(root);
             stage.setScene(scene);
         }
     }

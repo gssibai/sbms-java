@@ -39,6 +39,7 @@ public class SecureAcc extends BankAcc {
         return sa;
     }
 
+
     private static String getPassHash(String pass) {
         return pass;
     }

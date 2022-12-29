@@ -228,7 +228,7 @@
                                           <Insets bottom="5.0" left="200.0" right="200.0" top="40.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Button fx:id="completebtn" mnemonicParsing="false" onAction="#btnComplete_Action" styleClass="completebtn" stylesheets="@../../../style.css" text="Complete">
+                                    <Button fx:id="btndepositDone" mnemonicParsing="false" onAction="#btndepositDone_Action" styleClass="completebtn" stylesheets="@../../../style.css" text="Complete">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -252,7 +252,7 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane fx:id="paneWithdraw" layoutX="10.0" layoutY="10.0" visible="false">
+                  <Pane fx:id="paneWithdraw" layoutX="10.0" layoutY="10.0">
                      <children>
                         <Pane layoutX="101.0" layoutY="238.0" prefHeight="253.0" prefWidth="634.0" styleClass="subbg" stylesheets="@../../../style.css">
                            <children>
@@ -266,12 +266,12 @@
                                           <Insets />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField promptText="Enter digits like: 123.50" styleClass="valuefld" stylesheets="@../../../style.css">
+                                    <TextField fx:id="txtWamount" promptText="Enter digits like: 123.50" styleClass="valuefld" stylesheets="@../../../style.css">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="200.0" right="200.0" top="40.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Button mnemonicParsing="false" styleClass="completebtn" stylesheets="@../../../style.css" text="Complete">
+                                    <Button fx:id="btnWDone" mnemonicParsing="false" onAction="#btnWDone_Action" styleClass="completebtn" stylesheets="@../../../style.css" text="Complete">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -300,7 +300,7 @@
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="66.0" layoutY="69.0" text="0.00">
+                              <Label fx:id="lblAccBalance" layoutX="66.0" layoutY="69.0" text="0.00">
                                  <font>
                                     <Font size="33.0" />
                                  </font>
@@ -314,7 +314,7 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="paneInfo" layoutX="20.0" layoutY="20.0" onDragDetected="#btnInfo_Action">
+                  <Pane fx:id="paneInfo" layoutX="20.0" layoutY="20.0" onDragDetected="#btnInfo_Action" visible="false">
                      <children>
                         <Label layoutX="69.0" layoutY="31.0" text="Personal Informations">
                            <font>
@@ -464,12 +464,12 @@
                         </Pane>
                         <Pane fx:id="paneEditPhone" layoutX="400.0" layoutY="88.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css" visible="false">
                            <children>
-                              <Button fx:id="txtDoneRePhone" layoutX="167.0" layoutY="81.0" mnemonicParsing="false" onAction="#txtDoneRePhone_Action" prefHeight="30.0" prefWidth="109.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Done">
+                              <Button fx:id="btnDoneRePhone" layoutX="167.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnDoneRePhone_Action" prefHeight="30.0" prefWidth="109.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Done">
                                  <padding>
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </padding>
                               </Button>
-                              <Label fx:id="btnEditPhoneDone" layoutX="13.0" layoutY="15.0" onDragDetected="#btnEditPhoneDone_Action" text="Phone Number:">
+                              <Label layoutX="13.0" layoutY="15.0" text="Phone Number:">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

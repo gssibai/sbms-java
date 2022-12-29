@@ -17,13 +17,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
-    @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 
     @FXML
     private Button completebtn;
@@ -60,8 +53,7 @@ public class HelloController implements Initializable {
     private Pane paneWithdraw;
     @FXML
     private Pane paneInfo;
-    @FXML
-    private TextField txtDAmount;
+
     @FXML
     private Button btnDeleteAcc;
     @FXML
@@ -69,15 +61,45 @@ public class HelloController implements Initializable {
 
     private SecureAcc sa;
 
-    public void setSa(SecureAcc sa) {
-        this.sa = sa;
-    }
+    // ********* Deposit Panel **********
+    @FXML
+    private Button btndepositDone;
+    @FXML
+    private TextField txtDAmount;
 
     @FXML
-    void btnComplete_Action(ActionEvent event) {
-        double amount = Double.parseDouble(txtDAmount.getText());
-        sa.deposit(amount);
+    void btndepositDone_Action(ActionEvent event) {
+        if (txtDAmount != null) {
+            double amount = Double.parseDouble(txtDAmount.getText());
+            sa.deposit(amount);
+            message();
+        } else {
+            error();
+            return;
+        }
     }
+// *************     Withdraw Panel   **************
+    @FXML
+    private Label lblAccBalance;
+    @FXML
+    private TextField txtWamount;
+    @FXML
+    private Button btnWDone;
+
+
+    @FXML
+    void btnWDone_Action(ActionEvent event){
+
+            double amount = Double.parseDouble(txtWamount.getText());
+           if( sa.withdraw(amount)){
+               message();
+           }else {
+               error();
+           }
+
+    }
+
+// ****************
 
     void message() {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -87,6 +109,13 @@ public class HelloController implements Initializable {
     }
 
     //*************Personal informations panel buttons **********
+    private void error() {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Error");
+        a.setContentText("Error !\nDon't leave empty fileds");
+        a.show();
+    }
+
     @FXML
     private TextField txtReName;
 
@@ -102,6 +131,7 @@ public class HelloController implements Initializable {
     private Button btnEditEmail;
     @FXML
     private TextField txtEditEmail;
+
     @FXML
     private Button btnEditEmailDone;
     @FXML
@@ -109,12 +139,15 @@ public class HelloController implements Initializable {
     @FXML
     private Button btnEditNameDone;
     @FXML
+    private Button btnDoneRePhone;
+
+
+    @FXML
     private Pane paneMainPhone;
     @FXML
     private Pane paneMainName;
     @FXML
     private Pane paneMainEmail;
-
 
 
     @FXML
@@ -129,6 +162,9 @@ public class HelloController implements Initializable {
             sa.setEmail(txtEditEmail.getText());
             sa.save();
             message();
+        } else {
+            error();
+            return;
         }
         paneMainEmail.setVisible(true);
         paneEditEmail.setVisible(false);
@@ -142,10 +178,13 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    void btnEditPhoneDone_Action(ActionEvent event) {
-        if (!txtRePhone.getText().equals(null)) {
+    void btnDoneRePhone_Action(ActionEvent event) {
+        if (txtRePhone.getText() != null) {
             sa.setPhoneNo(txtRePhone.getText());
             sa.save();
+        } else {
+            error();
+            return;
         }
         paneMainPhone.setVisible(true);
         paneEditPhone.setVisible(false);
@@ -173,15 +212,19 @@ public class HelloController implements Initializable {
         paneName.setVisible(true);
         paneMainName.setVisible(false);
     }
+
     @FXML
     void btnEditNameDone_Action(ActionEvent event) {
-        if (!txtReName.getText().equals(null)) {
+        if (txtReName.getText() != null) {
             sa.setName(txtReName.getText());
             sa.save();
         }
-        if (!txtReSurname.getText().equals(null)) {
+        if (txtReSurname.getText() != null) {
             sa.setSurname(txtReSurname.getText());
             sa.save();
+        } else {
+            error();
+            return;
         }
 
         paneMainName.setVisible(true);
@@ -240,14 +283,19 @@ public class HelloController implements Initializable {
         paneEditPhone.setVisible(false);
         paneEditEmail.setVisible(false);
     }
+    public void setSa(SecureAcc sa) {
+        this.sa = sa;
+        nameTitle.setText(sa.getName());
+        surnameTitle.setText(sa.getSurname());
+    }
 
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         hidePanes();
         paneWelcome.setVisible(true);
         homebtn.getStyleClass().add("active");
-        nameTitle.setText(sa.getName());
-        surnameTitle.setText(sa.getSurname());
+
     }
 }
