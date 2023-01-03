@@ -19,6 +19,8 @@ public class LoginController {
     private Button btnLogin;
     @FXML
     private Button quitbtn;
+    @FXML
+    private TextField txtTwoFA;
 
     @FXML
     private TextField txtIdLogin;
@@ -48,19 +50,27 @@ public class LoginController {
 
         SecureAcc sa = SecureAcc.getSA(txtIdLogin.getText(), txtPassLogin.getText());
 
+
         if (sa == null) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("Error");
             a.setContentText("Invalid username or password");
             a.show();
+        } else if (!sa.is2faValid(txtTwoFA.getText())) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Error");
+            a.setContentText("Invalid 2FA code");
+            a.show();
         } else {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-           Parent root = fxmlLoader.load();
+           Parent root =(Parent) fxmlLoader.load();
             HelloController controller = fxmlLoader.<HelloController>getController();
             controller.setSa(sa);
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.show();
+
         }
     }
 

@@ -166,7 +166,40 @@
                <children>
                   <Pane fx:id="paneWelcome" layoutX="70.0" layoutY="20.0" prefHeight="200.0" prefWidth="750.0" visible="false">
                      <children>
-                        <Pane layoutX="541.0" layoutY="48.0" prefHeight="390.0" prefWidth="224.0" styleClass="subbg" stylesheets="@../../../style.css" />
+                        <Pane layoutX="541.0" layoutY="48.0" prefHeight="390.0" prefWidth="224.0" styleClass="subbg" stylesheets="@../../../style.css">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="150.0" prefWidth="224.0">
+                                 <children>
+                                    <Label text="Your balance" underline="true">
+                                       <VBox.margin>
+                                          <Insets top="70.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="Elza-Semibold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="34.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="lblAccBalanceWelcome" text="0.00">
+                                             <font>
+                                                <Font size="33.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="₺">
+                                             <font>
+                                                <Font size="36.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="-57.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../img/elements910.png" />
+                                 </image>
+                              </ImageView>
+                           </children></Pane>
                         <ImageView fitHeight="195.0" fitWidth="306.0" layoutX="-41.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true" x="550.0" y="540.0">
                            <image>
                               <Image url="@../../../img/cornerlogo.png" />
@@ -206,6 +239,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-52.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../img/element911.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
                      </children></Pane>
@@ -215,6 +253,11 @@
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="607.0" spacing="5.0">
                                  <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/element5.png" />
+                                       </image>
+                                    </ImageView>
                                     <Label contentDisplay="CENTER" text="Enter the amount you want to deposit" textAlignment="CENTER">
                                        <font>
                                           <Font size="25.0" />
@@ -238,6 +281,11 @@
                                     <Insets top="40.0" />
                                  </padding>
                               </VBox>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-55.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../img/element.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
                         <Label layoutX="69.0" layoutY="31.0" text="Deposit">
@@ -245,19 +293,29 @@
                               <Font name="Lato Regular" size="27.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="498.0" fitWidth="365.0" layoutY="-17.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" x="650.0" y="250.0">
+                        <ImageView fitHeight="498.0" fitWidth="365.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" x="650.0" y="242.0">
                            <image>
                               <Image url="@../../../img/deposit-withdraw.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="487.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" rotate="26.6">
+                           <image>
+                              <Image url="@../../../img/element6.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
                   <Pane fx:id="paneWithdraw" layoutX="10.0" layoutY="10.0">
                      <children>
-                        <Pane layoutX="101.0" layoutY="238.0" prefHeight="253.0" prefWidth="634.0" styleClass="subbg" stylesheets="@../../../style.css">
+                        <Pane layoutX="95.0" layoutY="172.0" prefHeight="253.0" prefWidth="634.0" styleClass="subbg" stylesheets="@../../../style.css">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="607.0" spacing="5.0">
                                  <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/element7.png" />
+                                       </image>
+                                    </ImageView>
                                     <Label contentDisplay="CENTER" text="Enter the amount you want to withdraw" textAlignment="CENTER">
                                        <font>
                                           <Font size="25.0" />
@@ -283,35 +341,58 @@
                               </VBox>
                            </children>
                         </Pane>
-                        <Label layoutX="69.0" layoutY="31.0" text="Withdraw">
+                        <Pane layoutX="435.0" layoutY="24.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
+                           <children>
+                              <VBox alignment="CENTER" layoutX="23.0" layoutY="16.0" prefHeight="94.0" prefWidth="230.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Available Amount:" underline="true">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="52.0" prefWidth="200.0" spacing="3.0">
+                                       <children>
+                                          <Label fx:id="lblAccBalance" text="0.00">
+                                             <font>
+                                                <Font size="33.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="₺">
+                                             <font>
+                                                <Font size="33.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                        <Label layoutX="54.0" layoutY="24.0" text="Withdraw">
                            <font>
-                              <Font name="Lato Regular" size="27.0" />
+                              <Font name="Elza-Semibold" size="27.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="498.0" fitWidth="365.0" layoutY="-17.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" x="650.0" y="250.0">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="46.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/element8.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="622.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/element4.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="498.0" fitWidth="365.0" layoutX="-10.0" layoutY="-10.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" x="650.0" y="242.0">
                            <image>
                               <Image url="@../../../img/deposit-withdraw.png" />
                            </image>
                         </ImageView>
-                        <Pane layoutX="441.0" layoutY="90.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
-                           <children>
-                              <Label layoutX="20.0" layoutY="17.0" text="Available Amount:" underline="true">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblAccBalance" layoutX="66.0" layoutY="69.0" text="0.00">
-                                 <font>
-                                    <Font size="33.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="149.0" layoutY="62.0" text="₺">
-                                 <font>
-                                    <Font size="42.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
+                        <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="489.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" rotate="26.6">
+                           <image>
+                              <Image url="@../../../img/element6.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </Pane>
                   <Pane fx:id="paneInfo" layoutX="20.0" layoutY="20.0" onDragDetected="#btnInfo_Action" visible="false">
@@ -333,12 +414,32 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="93.0" layoutY="55.0" text="+90 555 555 55 55" />
+                              <Label fx:id="lblInfoPhone" layoutX="94.0" layoutY="50.0" text="+90 555 555 55 55">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
                            </children>
                         </Pane>
                         <Pane fx:id="paneMainName" layoutX="70.0" layoutY="90.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css">
                            <children>
-                              <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="-6.0" prefHeight="100.0" prefWidth="279.0" spacing="15.0">
+                              <HBox alignment="CENTER" layoutX="22.0" layoutY="37.0" prefHeight="37.0" prefWidth="246.0" spacing="15.0">
+                                 <children>
+                                    <Label fx:id="lblInfoName" text="Name">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblInfoSurname" text="Surname">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="22.0" layoutY="4.0" prefHeight="37.0" prefWidth="246.0" spacing="15.0">
                                  <children>
                                     <Label text="Name">
                                        <font>
@@ -369,9 +470,9 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="74.0" layoutY="43.0" text="email@mail.com">
+                              <Label fx:id="lblInfoEmail" layoutX="93.0" layoutY="46.0" text="email@mail.com">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                               <Button fx:id="btnEditEmail" layoutX="178.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnEditEmail_Action" prefHeight="30.0" prefWidth="102.0" styleClass="completebtn" stylesheets="@../../../style.css" text="Edit Email">
@@ -388,7 +489,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="126.0" layoutY="51.0" text="1111">
+                              <Label fx:id="lblInfoId" layoutX="126.0" layoutY="51.0" text="1111">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -397,7 +498,7 @@
                         </Pane>
                         <Pane layoutX="70.0" layoutY="383.0" prefHeight="127.0" prefWidth="484.0" styleClass="subbg" stylesheets="@../../../style.css">
                            <children>
-                              <Label layoutX="23.0" layoutY="14.0" text="Delete Acoount:">
+                              <Label layoutX="23.0" layoutY="14.0" text="Delete Account:">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -477,6 +578,11 @@
                               <TextField fx:id="txtRePhone" layoutX="74.0" layoutY="47.0" styleClass="valuefld" stylesheets="@../../../style.css" />
                            </children>
                         </Pane>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/element9.png" />
+                           </image>
+                        </ImageView>
                         <Pane fx:id="paneEditEmail" layoutX="70.0" layoutY="240.0" prefHeight="127.0" prefWidth="289.0" styleClass="subbg" stylesheets="@../../../style.css" visible="false">
                            <children>
                               <Label layoutX="17.0" layoutY="10.0" text="Email:">

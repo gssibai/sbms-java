@@ -1,7 +1,6 @@
 package com.example.sbms;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -67,9 +66,12 @@ public class HelloController implements Initializable {
     @FXML
     private TextField txtDAmount;
 
+    // **************   Deposit Windows    *************
+
+
     @FXML
     void btndepositDone_Action(ActionEvent event) {
-        if (txtDAmount != null) {
+        if (!txtDAmount.equals(null)) {
             double amount = Double.parseDouble(txtDAmount.getText());
             sa.deposit(amount);
             message();
@@ -78,7 +80,8 @@ public class HelloController implements Initializable {
             return;
         }
     }
-// *************     Withdraw Panel   **************
+
+    // *************     Withdraw Panel   **************
     @FXML
     private Label lblAccBalance;
     @FXML
@@ -86,16 +89,27 @@ public class HelloController implements Initializable {
     @FXML
     private Button btnWDone;
 
+    @FXML
+    void btnWithdraw_Action(ActionEvent event) {
+        hidePanes();
+        paneWithdraw.setVisible(true);
+        withdrawbtn.getStyleClass().add("active");
+        lblAccBalance.setText(sa.getBalance().toString());
+    }
 
     @FXML
-    void btnWDone_Action(ActionEvent event){
+    void btnWDone_Action(ActionEvent event) {
 
-            double amount = Double.parseDouble(txtWamount.getText());
-           if( sa.withdraw(amount)){
-               message();
-           }else {
-               error();
-           }
+        double amount = Double.parseDouble(txtWamount.getText());
+        if (sa.withdraw(amount)) {
+            lblAccBalance.setText(sa.getBalance().toString());
+            message();
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Error");
+            a.setContentText("Error !\nYou don't enough balance");
+            a.show();
+        }
 
     }
 
@@ -115,6 +129,11 @@ public class HelloController implements Initializable {
         a.setContentText("Error !\nDon't leave empty fileds");
         a.show();
     }
+
+    @FXML
+    private Label lblInfoName;
+    @FXML
+    private Label lblInfoSurname;
 
     @FXML
     private TextField txtReName;
@@ -140,6 +159,12 @@ public class HelloController implements Initializable {
     private Button btnEditNameDone;
     @FXML
     private Button btnDoneRePhone;
+    @FXML
+    private Label lblInfoPhone;
+    @FXML
+    private Label lblInfoId;
+    @FXML
+    private Label lblInfoEmail;
 
 
     @FXML
@@ -254,18 +279,19 @@ public class HelloController implements Initializable {
         homebtn.getStyleClass().add("active");
     }
 
-    @FXML
-    void btnWithdraw_Action(ActionEvent event) {
-        hidePanes();
-        paneWithdraw.setVisible(true);
-        withdrawbtn.getStyleClass().add("active");
-    }
 
     @FXML
     void btnInfo_Action(ActionEvent event) {
         hidePanes();
         paneInfo.setVisible(true);
         infobtn.getStyleClass().add("active");
+        setSa(sa);
+        lblInfoName.setText((sa.getName()));
+        lblInfoSurname.setText((sa.getSurname()));
+        lblInfoId.setText(sa.getId());
+        lblInfoEmail.setText(sa.getEmail());
+        lblInfoPhone.setText(sa.getPhoneNo());
+        lblAccBalance.setText(sa.getBalance().toString());
     }
 
 
@@ -282,12 +308,22 @@ public class HelloController implements Initializable {
         paneName.setVisible(false);
         paneEditPhone.setVisible(false);
         paneEditEmail.setVisible(false);
+
+        txtDAmount.clear();
+        txtWamount.clear();
+
     }
+
     public void setSa(SecureAcc sa) {
         this.sa = sa;
         nameTitle.setText(sa.getName());
         surnameTitle.setText(sa.getSurname());
+        lblAccBalanceWelcome.setText(sa.getBalance().toString());
+
     }
+
+    @FXML
+    private Label lblAccBalanceWelcome;
 
     @FXML
     @Override
@@ -296,6 +332,7 @@ public class HelloController implements Initializable {
         hidePanes();
         paneWelcome.setVisible(true);
         homebtn.getStyleClass().add("active");
+
 
     }
 }

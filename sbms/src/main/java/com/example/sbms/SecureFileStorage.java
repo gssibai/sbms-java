@@ -1,17 +1,23 @@
 package com.example.sbms;
 
+import org.apache.commons.codec.binary.Hex;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
+import java.security.Key;
 
-public class FileStorage implements IStorage {
+public class SecureFileStorage implements IStorage {
 
-    private String ext = ".txt";
+    private String ext = ".dat";
 
     @Override
     public boolean write(SecureAcc sa) {
         if (sa.getId() != null) {
             try {
-                FileWriter fw = new FileWriter(sa.getId() + ext);
-                BufferedWriter bw = new BufferedWriter(fw);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                OutputStreamWriter osw = new OutputStreamWriter(baos);
+                BufferedWriter bw = new BufferedWriter(osw);
                 bw.write(sa.getPassHash());
                 bw.newLine();
                 bw.write(sa.getFaKey());
@@ -29,9 +35,21 @@ public class FileStorage implements IStorage {
                 bw.write(sa.getId());
                 bw.newLine();
                 bw.close();
-                fw.close();
+                osw.close();
+                byte[] buff = baos.toByteArray();
+                baos.close();
+
+                byte[] pHash = Hex.decodeHex(sa.getPassHash());
+                Key aesKey = new SecretKeySpec(pHash, "AES");
+                Cipher cipher = Cipher.getInstance("AES");
+                cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+                byte[] encrypted = cipher.doFinal(buff);
+
+                FileOutputStream fos = new FileOutputStream(sa.getId() + ext);
+                fos.write(encrypted);
+                fos.close();
                 return true;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 return false;
             }
         }
@@ -42,14 +60,27 @@ public class FileStorage implements IStorage {
     @Override
     public SecureAcc read(String id, String passHash) {
         try {
-            FileReader fr = new FileReader(id + ext);
-            BufferedReader br = new BufferedReader(fr);
+            FileInputStream fis = new FileInputStream(id + ext);
+            byte[] encrypted = fis.readAllBytes();
+            fis.close();
+
+            byte[] pHash = Hex.decodeHex(passHash);
+            Key aesKey = new SecretKeySpec(pHash, "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, aesKey);
+            byte[] buff = cipher.doFinal(encrypted);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(buff);
+            InputStreamReader isr = new InputStreamReader(bais);
+            BufferedReader br = new BufferedReader(isr);
+
             SecureAcc sa = new SecureAcc();
             String fPassHash = br.readLine();
 
             if (!fPassHash.equals(passHash)) {
                 br.close();
-                fr.close();
+                isr.close();
+                bais.close();
 
                 return null;
             }
@@ -62,9 +93,10 @@ public class FileStorage implements IStorage {
             sa.setBalance(Double.parseDouble(br.readLine()));
             sa.setId(br.readLine());
             br.close();
-            fr.close();
+            isr.close();
+            bais.close();
             return sa;
-        } catch (IOException e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -81,5 +113,6 @@ public class FileStorage implements IStorage {
         f.delete();
         return true;
     }
+
 
 }

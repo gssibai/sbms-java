@@ -1,15 +1,19 @@
 package com.example.sbms;
 
-import java.util.Currency;
 import java.util.Random;
 
 public class BankAcc extends PersonalData {
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String id = null;
     private Double balance= 0.0;
 
     public String getId() {
         return id;
     }
+
 
 
     public Double getBalance() {
