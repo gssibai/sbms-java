@@ -6,6 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -77,7 +80,6 @@ public class HelloController implements Initializable {
             message();
         } else {
             error();
-            return;
         }
     }
 
@@ -115,14 +117,14 @@ public class HelloController implements Initializable {
 
 // ****************
 
-    void message() {
+    private void message() {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("Information");
         a.setContentText("Your changes has been saved!");
-
+        a.show();
     }
 
-    //*************Personal informations panel buttons **********
+
     private void error() {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle("Error");
@@ -130,11 +132,13 @@ public class HelloController implements Initializable {
         a.show();
     }
 
+    //*************Personal informations panel buttons **********
     @FXML
     private Label lblInfoName;
     @FXML
     private Label lblInfoSurname;
-
+    @FXML
+    private Label lblTwoFA;
     @FXML
     private TextField txtReName;
 
@@ -173,12 +177,51 @@ public class HelloController implements Initializable {
     private Pane paneMainName;
     @FXML
     private Pane paneMainEmail;
+    @FXML
+    private Button btnCopy;
+    @FXML
+    private Button btnNameCancel;
 
+    @FXML
+    void btnInfo_Action(ActionEvent event) {
+        hidePanes();
+        paneInfo.setVisible(true);
+        infobtn.getStyleClass().add("active");
+        setSa(sa);
+        lblInfoName.setText((sa.getName()));
+        lblInfoSurname.setText((sa.getSurname()));
+        lblInfoId.setText(sa.getId());
+        lblInfoEmail.setText(sa.getEmail());
+        lblInfoPhone.setText(sa.getPhoneNo());
+        lblAccBalance.setText(sa.getBalance().toString());
+        lblTwoFA.setText(sa.getFaKey());
+    }
+
+    @FXML
+    void btnCopy_Action(ActionEvent event) {
+
+        final ClipboardContent content = new ClipboardContent();
+        content.put(DataFormat.PLAIN_TEXT, lblTwoFA.getText());
+        Clipboard.getSystemClipboard().setContent(content);
+        event.consume();
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Information");
+        a.setContentText("Code Copied!");
+        a.show();
+
+    }
 
     @FXML
     void btnEditEmail_Action(ActionEvent event) {
         paneEditEmail.setVisible(true);
         paneMainEmail.setVisible(false);
+        txtEditEmail.setText(sa.getEmail());
+    }
+    @FXML
+    void btnEmailCancel_Action(ActionEvent event){
+        paneEditEmail.setVisible(false);
+        paneMainEmail.setVisible(true);
+        txtEditEmail.clear();
     }
 
     @FXML
@@ -191,6 +234,7 @@ public class HelloController implements Initializable {
             error();
             return;
         }
+        lblInfoEmail.setText(sa.getEmail());
         paneMainEmail.setVisible(true);
         paneEditEmail.setVisible(false);
     }
@@ -199,6 +243,7 @@ public class HelloController implements Initializable {
     void btnEditPhone_Action(ActionEvent event) {
         paneEditPhone.setVisible(true);
         paneMainPhone.setVisible(false);
+        txtRePhone.setText(sa.getPhoneNo());
 
     }
 
@@ -213,7 +258,14 @@ public class HelloController implements Initializable {
         }
         paneMainPhone.setVisible(true);
         paneEditPhone.setVisible(false);
+        lblInfoPhone.setText(sa.getPhoneNo());
         message();
+    }
+    @FXML
+    void btnPhoneCancel_Action(ActionEvent event){
+        paneEditPhone.setVisible(false);
+        paneMainPhone.setVisible(true);
+        txtRePhone.clear();
     }
 
     @FXML
@@ -236,6 +288,9 @@ public class HelloController implements Initializable {
     void btnEditName_Action(ActionEvent event) {
         paneName.setVisible(true);
         paneMainName.setVisible(false);
+
+        txtReName.setText(sa.getName());
+        txtReSurname.setText(sa.getSurname());
     }
 
     @FXML
@@ -243,18 +298,29 @@ public class HelloController implements Initializable {
         if (txtReName.getText() != null) {
             sa.setName(txtReName.getText());
             sa.save();
+        } else {
+            error();
         }
         if (txtReSurname.getText() != null) {
             sa.setSurname(txtReSurname.getText());
             sa.save();
         } else {
             error();
-            return;
         }
-
-        paneMainName.setVisible(true);
-
         paneName.setVisible(false);
+        paneMainName.setVisible(true);
+        txtReName.clear();
+        txtReSurname.clear();
+        lblInfoName.setText(sa.getName());
+        lblInfoSurname.setText(sa.getSurname());
+    }
+
+    @FXML
+    void btnNameCancel_Action(ActionEvent event) {
+        paneName.setVisible(false);
+        paneMainName.setVisible(true);
+        txtReName.clear();
+        txtReSurname.clear();
     }
 
     //  ************
@@ -277,21 +343,9 @@ public class HelloController implements Initializable {
         hidePanes();
         paneWelcome.setVisible(true);
         homebtn.getStyleClass().add("active");
-    }
-
-
-    @FXML
-    void btnInfo_Action(ActionEvent event) {
-        hidePanes();
-        paneInfo.setVisible(true);
-        infobtn.getStyleClass().add("active");
-        setSa(sa);
-        lblInfoName.setText((sa.getName()));
-        lblInfoSurname.setText((sa.getSurname()));
-        lblInfoId.setText(sa.getId());
-        lblInfoEmail.setText(sa.getEmail());
-        lblInfoPhone.setText(sa.getPhoneNo());
-        lblAccBalance.setText(sa.getBalance().toString());
+        nameTitle.setText(sa.getName());
+        surnameTitle.setText(sa.getSurname());
+        lblAccBalanceWelcome.setText(sa.getBalance().toString());
     }
 
 
